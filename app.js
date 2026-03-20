@@ -11,6 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const universitySelect = document.getElementById("university");
   const majorSelect = document.getElementById("major");
+  const categorySelect = document.getElementById("category");
+  const excelUpload = document.getElementById("excel-upload");
+  const studentSelect = document.getElementById("student-select");
+  const gradeInput = document.getElementById("student-grade");
+  const classInput = document.getElementById("student-class");
+  const numberInput = document.getElementById("student-number");
+  const nameInput = document.getElementById("student-name");
+  const courseExcelUpload = document.getElementById("course-excel-upload");
+  const coursesInput = document.getElementById("courses");
+  const batchExcelUpload = document.getElementById("batch-excel-upload");
+  const subjectInput = document.getElementById("subject-records");
+  const creativeInput = document.getElementById("creative-activities");
+  const behaviorInput = document.getElementById("behavioral-records");
+  const achievementOnlyInput = document.getElementById("achievement-only");
+  const averageGradeInput = document.getElementById("average-grade");
+
+  let globalCourseJson = null;
+  let globalBatchJsons = [];
 
   const universityData = {
     "고려대학교": {
@@ -82,8 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     universitySelect.appendChild(option);
   }
 
-  const categorySelect = document.getElementById("category");
-
   // 1단계: 대학 선택 → 계열 채우기
   universitySelect.addEventListener("change", () => {
     const selectedUni = universitySelect.value;
@@ -124,107 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
       majorSelect.appendChild(o);
     });
   });
-
-  // --- Persistence Logic ---
-  const STORAGE_KEYS = {
-    API_KEY: "ai_student_api_key",
-    STUDENT_LIST: "ai_student_list",
-    COURSE_DATA: "ai_student_course_data",
-    BATCH_DATA: "ai_student_batch_data",
-    SELECTED_INDEX: "ai_student_selected_index",
-    UNI: "ai_student_uni",
-    CAT: "ai_student_cat",
-    MAJOR: "ai_student_major"
-  };
-
-  function saveState() {
-    if (!apiKeyInput) return;
-    localStorage.setItem(STORAGE_KEYS.API_KEY, apiKeyInput.value);
-    localStorage.setItem(STORAGE_KEYS.UNI, universitySelect.value);
-    localStorage.setItem(STORAGE_KEYS.CAT, categorySelect.value);
-    localStorage.setItem(STORAGE_KEYS.MAJOR, majorSelect.value);
-    localStorage.setItem(STORAGE_KEYS.SELECTED_INDEX, studentSelect.selectedIndex);
-    
-    try {
-      if (studentSelect.innerHTML) localStorage.setItem(STORAGE_KEYS.STUDENT_LIST, studentSelect.innerHTML);
-      if (globalCourseJson) localStorage.setItem(STORAGE_KEYS.COURSE_DATA, JSON.stringify(globalCourseJson));
-      if (globalBatchJsons) localStorage.setItem(STORAGE_KEYS.BATCH_DATA, JSON.stringify(globalBatchJsons));
-    } catch (e) {
-      console.warn("Local storage limit might have been exceeded. Some data not saved.", e);
-    }
-  }
-
-  function loadState() {
-    const savedApiKey = localStorage.getItem(STORAGE_KEYS.API_KEY);
-    if (savedApiKey && apiKeyInput) apiKeyInput.value = savedApiKey;
-
-    const savedUni = localStorage.getItem(STORAGE_KEYS.UNI);
-    if (savedUni) {
-      universitySelect.value = savedUni;
-      universitySelect.dispatchEvent(new Event("change"));
-      
-      const savedCat = localStorage.getItem(STORAGE_KEYS.CAT);
-      if (savedCat) {
-        categorySelect.value = savedCat;
-        categorySelect.dispatchEvent(new Event("change"));
-        
-        const savedMajor = localStorage.getItem(STORAGE_KEYS.MAJOR);
-        if (savedMajor) majorSelect.value = savedMajor;
-      }
-    }
-
-    const savedStudentList = localStorage.getItem(STORAGE_KEYS.STUDENT_LIST);
-    if (savedStudentList) {
-      studentSelect.innerHTML = savedStudentList;
-      const savedIndex = localStorage.getItem(STORAGE_KEYS.SELECTED_INDEX);
-      if (savedIndex !== null) {
-        studentSelect.selectedIndex = savedIndex;
-      }
-    }
-
-    const savedCourseData = localStorage.getItem(STORAGE_KEYS.COURSE_DATA);
-    if (savedCourseData) {
-      try {
-        globalCourseJson = JSON.parse(savedCourseData);
-      } catch (e) { console.error(e); }
-    }
-
-    const savedBatchData = localStorage.getItem(STORAGE_KEYS.BATCH_DATA);
-    if (savedBatchData) {
-      try {
-        globalBatchJsons = JSON.parse(savedBatchData);
-      } catch (e) { console.error(e); }
-    }
-
-    if (studentSelect.selectedIndex > 0) {
-      studentSelect.dispatchEvent(new Event("change"));
-    }
-  }
-
-  if (resetDataBtn) {
-    resetDataBtn.addEventListener("click", () => {
-      if (confirm("저장된 모든 학생 데이터와 설정(API 키 포함)을 삭제하시겠습니까?")) {
-        localStorage.clear();
-        location.reload();
-      }
-    });
-  }
-
-  loadState();
-
-  if (apiKeyInput) apiKeyInput.addEventListener("change", saveState);
-  universitySelect.addEventListener("change", saveState);
-  categorySelect.addEventListener("change", saveState);
-  majorSelect.addEventListener("change", saveState);
-
-  let globalCourseJson = null;
-  let globalBatchJsons = [];
-  const excelUpload = document.getElementById("excel-upload");
-  const studentSelect = document.getElementById("student-select");
-  const gradeInput = document.getElementById("student-grade");
-  const classInput = document.getElementById("student-class");
-  const numberInput = document.getElementById("student-number");
-  const nameInput = document.getElementById("student-name");
 
   if (excelUpload) {
     excelUpload.addEventListener("change", (e) => {
@@ -309,8 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const courseExcelUpload = document.getElementById("course-excel-upload");
-  const coursesInput = document.getElementById("courses");
   if (courseExcelUpload) {
     courseExcelUpload.addEventListener("change", (e) => {
       const file = e.target.files[0];
@@ -440,11 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const aoInput = document.getElementById("achievement-only");
     if (aoInput) aoInput.value = achieveOnlyCourses.length > 0 ? achieveOnlyCourses.join(", ") : "해당 없음";
   }
-
-  const batchExcelUpload = document.getElementById("batch-excel-upload");
-  const subjectInput = document.getElementById("subject-records");
-  const creativeInput = document.getElementById("creative-activities");
-  const behaviorInput = document.getElementById("behavioral-records");
 
   if (batchExcelUpload) {
     batchExcelUpload.addEventListener("change", async (e) => {
@@ -1435,4 +1343,96 @@ document.addEventListener("DOMContentLoaded", () => {
       return generatedText;
     }
   }
+
+  // --- Persistence Logic ---
+  const STORAGE_KEYS = {
+    API_KEY: "ai_student_api_key",
+    STUDENT_LIST: "ai_student_list",
+    COURSE_DATA: "ai_student_course_data",
+    BATCH_DATA: "ai_student_batch_data",
+    SELECTED_INDEX: "ai_student_selected_index",
+    UNI: "ai_student_uni",
+    CAT: "ai_student_cat",
+    MAJOR: "ai_student_major"
+  };
+
+  function saveState() {
+    if (!apiKeyInput) return;
+    localStorage.setItem(STORAGE_KEYS.API_KEY, apiKeyInput.value);
+    localStorage.setItem(STORAGE_KEYS.UNI, universitySelect.value);
+    localStorage.setItem(STORAGE_KEYS.CAT, categorySelect.value);
+    localStorage.setItem(STORAGE_KEYS.MAJOR, majorSelect.value);
+    localStorage.setItem(STORAGE_KEYS.SELECTED_INDEX, studentSelect.selectedIndex);
+    
+    try {
+      if (studentSelect.innerHTML) localStorage.setItem(STORAGE_KEYS.STUDENT_LIST, studentSelect.innerHTML);
+      if (globalCourseJson) localStorage.setItem(STORAGE_KEYS.COURSE_DATA, JSON.stringify(globalCourseJson));
+      if (globalBatchJsons) localStorage.setItem(STORAGE_KEYS.BATCH_DATA, JSON.stringify(globalBatchJsons));
+    } catch (e) {
+      console.warn("Local storage limit might have been exceeded. Some data not saved.", e);
+    }
+  }
+
+  function loadState() {
+    const savedApiKey = localStorage.getItem(STORAGE_KEYS.API_KEY);
+    if (savedApiKey && apiKeyInput) apiKeyInput.value = savedApiKey;
+
+    const savedUni = localStorage.getItem(STORAGE_KEYS.UNI);
+    if (savedUni) {
+      universitySelect.value = savedUni;
+      universitySelect.dispatchEvent(new Event("change"));
+      
+      const savedCat = localStorage.getItem(STORAGE_KEYS.CAT);
+      if (savedCat) {
+        categorySelect.value = savedCat;
+        categorySelect.dispatchEvent(new Event("change"));
+        
+        const savedMajor = localStorage.getItem(STORAGE_KEYS.MAJOR);
+        if (savedMajor) majorSelect.value = savedMajor;
+      }
+    }
+
+    const savedStudentList = localStorage.getItem(STORAGE_KEYS.STUDENT_LIST);
+    if (savedStudentList) {
+      studentSelect.innerHTML = savedStudentList;
+      const savedIndex = localStorage.getItem(STORAGE_KEYS.SELECTED_INDEX);
+      if (savedIndex !== null) {
+        studentSelect.selectedIndex = savedIndex;
+      }
+    }
+
+    const savedCourseData = localStorage.getItem(STORAGE_KEYS.COURSE_DATA);
+    if (savedCourseData) {
+      try {
+        globalCourseJson = JSON.parse(savedCourseData);
+      } catch (e) { console.error(e); }
+    }
+
+    const savedBatchData = localStorage.getItem(STORAGE_KEYS.BATCH_DATA);
+    if (savedBatchData) {
+      try {
+        globalBatchJsons = JSON.parse(savedBatchData);
+      } catch (e) { console.error(e); }
+    }
+
+    if (studentSelect.selectedIndex > 0) {
+      studentSelect.dispatchEvent(new Event("change"));
+    }
+  }
+
+  if (resetDataBtn) {
+    resetDataBtn.addEventListener("click", () => {
+      if (confirm("저장된 모든 학생 데이터와 설정(API 키 포함)을 삭제하시겠습니까?")) {
+        localStorage.clear();
+        location.reload();
+      }
+    });
+  }
+
+  loadState();
+
+  if (apiKeyInput) apiKeyInput.addEventListener("change", saveState);
+  universitySelect.addEventListener("change", saveState);
+  categorySelect.addEventListener("change", saveState);
+  majorSelect.addEventListener("change", saveState);
 });
