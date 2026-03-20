@@ -7,7 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetDataBtn = document.getElementById("reset-data-btn");
   const apiKeyInput = document.getElementById("api-key");
 
-  marked.setOptions({ breaks: true, gfm: true });
+  if (typeof marked === 'undefined') {
+    console.error("marked.js is not loaded!");
+  } else {
+    marked.setOptions({ breaks: true, gfm: true });
+  }
+
+  if (typeof XLSX === 'undefined') {
+    console.error("xlsx.js is not loaded!");
+  }
 
   const universitySelect = document.getElementById("university");
   const majorSelect = document.getElementById("major");
@@ -209,6 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (studentSelect) {
     studentSelect.addEventListener("change", () => {
+      console.log("studentSelect change event triggered.");
       saveState();
       const selected = studentSelect.options[studentSelect.selectedIndex];
       if (!selected || selected.disabled) return;
@@ -1357,6 +1366,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function saveState() {
+    console.log("Saving state to localStorage...");
     if (!apiKeyInput) return;
     localStorage.setItem(STORAGE_KEYS.API_KEY, apiKeyInput.value);
     localStorage.setItem(STORAGE_KEYS.UNI, universitySelect.value);
@@ -1416,6 +1426,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (studentSelect.selectedIndex > 0) {
+      console.log("Triggering auto-extraction for selected student index:", studentSelect.selectedIndex);
       studentSelect.dispatchEvent(new Event("change"));
     }
   }
