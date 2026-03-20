@@ -599,24 +599,19 @@ document.addEventListener("DOMContentLoaded", () => {
         jsonString = jsonString.substring(startIdx, endIdx + 1);
       }
       
+      // JSON 구조 보정 (따옴표 내부의 실제 줄바꿈을 \n으로 변경)
+      jsonString = jsonString.replace(/"([^"]*?)"/gs, (match, p1) => {
+        return '"' + p1.replace(/\n/g, '\\n').replace(/\r/g, '\\r') + '"';
+      });
+
       // JSON 파싱 시도
       let reportData;
       try {
         reportData = JSON.parse(jsonString);
       } catch (parseError) {
-        console.error("JSON Parsing Error at position:", parseError.message);
+        console.error("JSON Parsing Error:", parseError.message);
         console.log("Failed JSON string:", jsonString);
-        
-        // 만약 문자열 내부에 실제 줄바꿈이 포함되어 파싱이 실패하는 경우 대비 (일반적인 Unterminated string 원인)
-        try {
-          // 아주 조심스럽게 줄바꿈 문자를 처리해봄 (문자열 값 내의 줄바꿈만 \n으로 변경하는 것은 어려우므로 전체 시도)
-          const fixedJson = jsonString.replace(/\n/g, "\\n").replace(/\r/g, "\\r");
-          // 하지만 위 방식은 객체 구조 자체를 깨뜨릴 수 있음. 
-          // 실제로는 AI 응답 자체가 잘렸을 가능성이 높음.
-          throw parseError; // 우선은 원본 에러를 다시 던짐
-        } catch (e) {
-          throw new Error("AI 응답 형식이 올바르지 않거나 분석 내용이 너무 깁니다. 다시 시도해 주세요. (상세: " + parseError.message + ")");
-        }
+        throw new Error("AI 응답 형식이 올바르지 않거나 분석 내용이 너무 깁니다. 다시 시도해 주세요. (상세: " + parseError.message + ")");
       }
 
       document.getElementById("overallScore").textContent = reportData.totalScore || 0;
@@ -637,11 +632,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById(btnId);
         if (!btn) return;
         btn.onclick = () => {
+          const evidenceText = Array.isArray(compData.evidence) ? compData.evidence.map(e => "- " + e).join("\n") : (compData.evidence || "근거 자료가 없습니다.");
           document.getElementById("modalTitle").textContent = title + " 상세 분석";
           document.getElementById("modalBody").innerHTML =
             "<div style='background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--accent-primary)'>" +
             "<h4 style='margin-top:0;color:#96baff;margin-bottom:8px'>평가 요약</h4>" + marked.parse(compData.evaluation || "평가 내용이 없습니다.") + "</div>" +
-            "<div style='padding:0 5px'><h4 style='color:#96baff;margin-bottom:10px'>근거 활동 자료</h4>" + marked.parse(compData.evidence || "근거 자료가 없습니다.") + "</div>";
+            "<div style='padding:0 5px'><h4 style='color:#96baff;margin-bottom:10px'>근거 활동 자료</h4>" + marked.parse(evidenceText) + "</div>";
           document.getElementById("analysisModal").classList.remove("hidden");
         };
       };
@@ -1295,7 +1291,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "3. " + competencyNames.community + " (반영 비율: " + (weights.community * 100).toFixed(0) + "%)\n\n" +
       "[평가 원칙] 당신은 매우 냉철하고 엄격한 입학사정관입니다. 단순한 나열이나 칭찬 위주의 서술을 지양하고, 학생의 기록에서 실질적인 역량이 드러나지 않는 부분이나 보완이 필요한 지점을 날카롭게 비판하십시오. 변별력을 위해 점수를 짜게 부여하십시오.\n\n" +
       "[종합 평가 주안점] " + data.university + " " + data.major + " 입학사정관의 시각에서 강점뿐만 아니라 치명적인 약점과 향후 전략적 보완점을 400자 이상 상세히 서술하세요.\n\n" +
-      "[근거 자료] 각 역량별로 생기부 기록에 기반한 구체적인 근거를 5~7개씩 반드시 불릿(-) 형태로 작성하세요.\n\n" +
+      "[근거 자료] 각 역량별로 생기부 기록에 기반한 구체적인 근거를 5~7개씩 반드시 JSON 배열(List) 형태로 작성하세요.\n\n" +
       "반드시 유효한 JSON 형식으로만 응답하세요. 다른 설명이나 마크다운 백틱(```)은 포함하지 마십시오. \n" +
       "특히, 생성되는 문자열 내에 실제 줄바꿈(Line break)이 포함되지 않도록 주의하고, 줄바꿈이 필요한 경우 반드시 '\\n' 문자로 대체하십시오.";
     const requestBody = {
@@ -1317,7 +1313,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   properties: {
                     score: { type: "NUMBER" },
                     evaluation: { type: "STRING" },
-                    evidence: { type: "STRING" }
+                    evidence: { type: "ARRAY", items: { type: "STRING" } }
                   },
                   required: ["score", "evaluation", "evidence"]
                 },
@@ -1326,7 +1322,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   properties: {
                     score: { type: "NUMBER" },
                     evaluation: { type: "STRING" },
-                    evidence: { type: "STRING" }
+                    evidence: { type: "ARRAY", items: { type: "STRING" } }
                   },
                   required: ["score", "evaluation", "evidence"]
                 },
@@ -1335,7 +1331,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   properties: {
                     score: { type: "NUMBER" },
                     evaluation: { type: "STRING" },
-                    evidence: { type: "STRING" }
+                    evidence: { type: "ARRAY", items: { type: "STRING" } }
                   },
                   required: ["score", "evaluation", "evidence"]
                 }
@@ -1368,6 +1364,11 @@ document.addEventListener("DOMContentLoaded", () => {
         jsonString = jsonString.substring(startIdx, endIdx + 1);
       }
       
+      // JSON 구조 보정
+      jsonString = jsonString.replace(/"([^"]*?)"/gs, (match, p1) => {
+        return '"' + p1.replace(/\n/g, '\\n').replace(/\r/g, '\\r') + '"';
+      });
+
       const report = JSON.parse(jsonString);
       const sAca = report.competencies?.academic?.score || 0;
       const sCar = report.competencies?.career?.score || 0;
