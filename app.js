@@ -40,65 +40,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const universityData = {
     "고려대학교": {
-      "인문·사회계열": ["철학과","한국어문학과","영어영문학과","사회학과","심리학과","독어독문학과","노어노문학과","중어중문학과","불어불문학과","정치외교학과","행정학과","경제학과"],
-      "자연·공학·생활계열": ["생명과학부","환경생태공학부","뇌인지과학과","스마트보안학부","데이터과학부","사이버국방학과","반도체공학과","신소재공학부","화공생명공학부","기계공학부","의생명공학부","전기전자공학부","컴퓨터학과","산업경영공학부"],
-      "경상 기타": ["경영대학","국제학부","디자인조형학부","체육교육과"]
+      "인문·사회계열": ["철학과", "한국어문학과", "영어영문학과", "사회학과", "심리학과", "독어독문학과", "노어노문학과", "중어중문학과", "불어불문학과", "정치외교학과", "행정학과", "경제학과"],
+      "자연·공학·생활계열": ["생명과학부", "환경생태공학부", "뇌인지과학과", "스마트보안학부", "데이터과학부", "사이버국방학과", "반도체공학과", "신소재공학부", "화공생명공학부", "기계공학부", "의생명공학부", "전기전자공학부", "컴퓨터학과", "산업경영공학부"],
+      "경상 기타": ["경영대학", "국제학부", "디자인조형학부", "체육교육과"]
     },
     "서울대학교": {
-      "인문·사회계열": ["철학과","국어국문학과","영어영문학과","독어독문학과","불어불문학과","노어노문학과","서어서문학과","언어학과","동양사학과","서양사학과","고고미술사학과","종교학과","미학과","사학과","국어교육과","영어교육과","사회교육과","역사교육과","지리교육과","윤리교육과","소비자학과","아동가족학과","의류학과","경제학부","사회학과","사회복지학과"],
-      "자연·공학·생활계열": ["전기정보공학부","컴퓨터공학부","기계공학부","항공우주공학과","조선해양공학과","화학생물공학부","재료공학부","건축학과","건설환경공학부","산업공학과","원자핵공학과","에너지자원공학과","수학과","물리학과","화학과","생명과학부","수의예과","약학과","의예과","치의예과","간호학과"],
-      "경상·예체능": ["경영학과","인류학과","지리학과","음악대학","미술학과","체육교육과"]
+      "인문·사회계열": ["철학과", "국어국문학과", "영어영문학과", "독어독문학과", "불어불문학과", "노어노문학과", "서어서문학과", "언어학과", "동양사학과", "서양사학과", "고고미술사학과", "종교학과", "미학과", "사학과", "국어교육과", "영어교육과", "사회교육과", "역사교육과", "지리교육과", "윤리교육과", "소비자학과", "아동가족학과", "의류학과", "경제학부", "사회학과", "사회복지학과"],
+      "자연·공학·생활계열": ["전기정보공학부", "컴퓨터공학부", "기계공학부", "항공우주공학과", "조선해양공학과", "화학생물공학부", "재료공학부", "건축학과", "건설환경공학부", "산업공학과", "원자핵공학과", "에너지자원공학과", "수학과", "물리학과", "화학과", "생명과학부", "수의예과", "약학과", "의예과", "치의예과", "간호학과"],
+      "경상·예체능": ["경영학과", "인류학과", "지리학과", "음악대학", "미술학과", "체육교육과"]
     },
     "연세대학교": {
-      "인문·사회계열": ["한국어문학과","중어중문학과","영어영문학과","독어독문학과","불어불문학과","노어노문학과","사학과","철학과","문헌정보학과","심리학과","경제학부","행정학과","사회학과","사회복지학과","정치외교학과","언론홍보영상학부","교육학과","문화인류학과","국어교육과","영어교육과","수학교육과"],
-      "자연·공학·생활계열": ["수학과","물리학과","화학과","지구시스템과학과","대기과학과","천문우주학과","전기전자공학부","기계공학부","토목환경공학과","화공생명공학부","신소재공학부","도시공학과","IT융합공학과","반도체공학부","생명시스템대학"],
-      "국제·경영": ["경영대학","경제대학","의과대학","치과대학","간호대학","생명공학부","아동가족학과","식품영양학과"]
+      "인문·사회계열": ["한국어문학과", "중어중문학과", "영어영문학과", "독어독문학과", "불어불문학과", "노어노문학과", "사학과", "철학과", "문헌정보학과", "심리학과", "경제학부", "행정학과", "사회학과", "사회복지학과", "정치외교학과", "언론홍보영상학부", "교육학과", "문화인류학과", "국어교육과", "영어교육과", "수학교육과"],
+      "자연·공학·생활계열": ["수학과", "물리학과", "화학과", "지구시스템과학과", "대기과학과", "천문우주학과", "전기전자공학부", "기계공학부", "토목환경공학과", "화공생명공학부", "신소재공학부", "도시공학과", "IT융합공학과", "반도체공학부", "생명시스템대학"],
+      "국제·경영": ["경영대학", "경제대학", "의과대학", "치과대학", "간호대학", "생명공학부", "아동가족학과", "식품영양학과"]
     },
     "한양대학교": {
-      "인문·사회계열": ["국어국문학과","영어영문학과","독어독문학과","사학과","철학과","정치외교학과","사회학과","미디어커뮤니케이션학과","경제금융학부","행정학과","국제학부"],
-      "자연·공학·생활계열": ["수학과","물리학과","화학과","건축학부","기계공학부","전기전자공학부","컴퓨터소프트웨어학부","에너지공학과","원자력공학과","산업공학과","생명공학과","간호학부"],
-      "경상·예체능": ["경영학부","영어교육과","수학교육과","체육교육과"]
+      "인문·사회계열": ["국어국문학과", "영어영문학과", "독어독문학과", "사학과", "철학과", "정치외교학과", "사회학과", "미디어커뮤니케이션학과", "경제금융학부", "행정학과", "국제학부"],
+      "자연·공학·생활계열": ["수학과", "물리학과", "화학과", "건축학부", "기계공학부", "전기전자공학부", "컴퓨터소프트웨어학부", "에너지공학과", "원자력공학과", "산업공학과", "생명공학과", "간호학부"],
+      "경상·예체능": ["경영학부", "영어교육과", "수학교육과", "체육교육과"]
     },
     "성균관대학교": {
-      "개설학과": ["유학·동양학과","국어국문학과","영어영문학과","한문학과","사학과","철학과","행정학과","정치외교학과","사회학과","사회복지학과","심리학과","경제학과","통계학과","법학과","경영학과","소프트웨어학과","반도체시스템공학과","전자전기공학부","화학공학부","기계공학부","건설환경공학부","건축학과","나노공학과","식품생명공학과","의상학과","체육교육과","교육학과"]
+      "개설학과": ["유학·동양학과", "국어국문학과", "영어영문학과", "한문학과", "사학과", "철학과", "행정학과", "정치외교학과", "사회학과", "사회복지학과", "심리학과", "경제학과", "통계학과", "법학과", "경영학과", "소프트웨어학과", "반도체시스템공학과", "전자전기공학부", "화학공학부", "기계공학부", "건설환경공학부", "건축학과", "나노공학과", "식품생명공학과", "의상학과", "체육교육과", "교육학과"]
     },
     "중앙대학교": {
-      "인문·사회계열": ["철학과","영어영문학과","국어국문학과","역사학과","정치외교학과","사회학과","사회복지학과","경제학부","문헌정보학과","교육학과","유아교육학과"],
-      "자연·공학계열": ["수학과","화학과","물리학과","생명과학과","건축학부","기계공학부","전자전기공학부","컴퓨터공학부","소프트웨어학부","AI학과","간호학과"],
-      "경상·예체능": ["경영학부","광고홍보학과","체육교육학과","스포츠과학부"]
+      "인문·사회계열": ["철학과", "영어영문학과", "국어국문학과", "역사학과", "정치외교학과", "사회학과", "사회복지학과", "경제학부", "문헌정보학과", "교육학과", "유아교육학과"],
+      "자연·공학계열": ["수학과", "화학과", "물리학과", "생명과학과", "건축학부", "기계공학부", "전자전기공학부", "컴퓨터공학부", "소프트웨어학부", "AI학과", "간호학과"],
+      "경상·예체능": ["경영학부", "광고홍보학과", "체육교육학과", "스포츠과학부"]
     },
     "경희대학교": {
-      "인문·사회계열": ["국어국문학과","사학과","철학과","영어영문학과","지리학과","법학과","행정학과","정치외교학과","사회학과","경제학과","무역학과"],
-      "자연·공학계열": ["수학과","물리학과","화학과","생물학과","식품영양학과","체육학과","태권도학과","간호학과","한의예과"],
-      "경상·예체능": ["경영학과","호텔경영학과","관광학과"]
+      "인문·사회계열": ["국어국문학과", "사학과", "철학과", "영어영문학과", "지리학과", "법학과", "행정학과", "정치외교학과", "사회학과", "경제학과", "무역학과"],
+      "자연·공학계열": ["수학과", "물리학과", "화학과", "생물학과", "식품영양학과", "체육학과", "태권도학과", "간호학과", "한의예과"],
+      "경상·예체능": ["경영학과", "호텔경영학과", "관광학과"]
     },
     "한국외국어대학교": {
-      "외국어·문화계열": ["ELLT학과","영미문학·문화학과","영어통번역학부","프랑스어학과","독일어학과","노어학과","스페인어학과","이탈리아어학과","포르투갈어학과","아랍어학부","이란어학과","몽골어학과","말레이·인도네시아어학부","태국어학과","베트남어학과","한국어학과","중국어학부","일본어학부"],
-      "사회·교육계열": ["정치외교학과","행정학과","미디어커뮤니케이션학부","경제학과","국제금융학과","국제학과","국제통상학과"],
-      "자연·AI계열": ["수학과","통계학과","Language&AI융합학과","AI데이터사이언스학부","Finance&AI융합학과"]
+      "외국어·문화계열": ["ELLT학과", "영미문학·문화학과", "영어통번역학부", "프랑스어학과", "독일어학과", "노어학과", "스페인어학과", "이탈리아어학과", "포르투갈어학과", "아랍어학부", "이란어학과", "몽골어학과", "말레이·인도네시아어학부", "태국어학과", "베트남어학과", "한국어학과", "중국어학부", "일본어학부"],
+      "사회·교육계열": ["정치외교학과", "행정학과", "미디어커뮤니케이션학부", "경제학과", "국제금융학과", "국제학과", "국제통상학과"],
+      "자연·AI계열": ["수학과", "통계학과", "Language&AI융합학과", "AI데이터사이언스학부", "Finance&AI융합학과"]
     },
     "건국대학교": {
-      "개설학과": ["경영학과","기술경영학과","부동산학과","첨단바이오공학과","통합생명공학부","동물자원학과","환경보건학과","커뮤니케이션학부","산업전자학부","영상전자학부","의학과","KU자유학예학과"]
+      "개설학과": ["경영학과", "기술경영학과", "부동산학과", "첨단바이오공학과", "통합생명공학부", "동물자원학과", "환경보건학과", "커뮤니케이션학부", "산업전자학부", "영상전자학부", "의학과", "KU자유학예학과"]
     },
     "단국대학교": {
-      "개설학과": ["법과대","공연예술학부","스포츠과학부","통합전공(미래모빌리티전공, 빅데이터비즈니스전공, 공연예술전공, 지능·로봇공학전공, 스마트도시·데이터사이언스전공, 의료서비스케어AI전공)"]
+      "개설학과": ["법과대", "공연예술학부", "스포츠과학부", "통합전공(미래모빌리티전공, 빅데이터비즈니스전공, 공연예술전공, 지능·로봇공학전공, 스마트도시·데이터사이언스전공, 의료서비스케어AI전공)"]
     },
     "아주대학교": {
-      "개설학과": ["경영정보학부","사회복지학과","사이버보안학과","수학과","물리학과","화학과","생명과학과","정보보호학과","소프트웨어학과","컴퓨터공학과","전자공학과","기계공학과","산업공학과","화학공학과","건축학과","의학과","간호학과","AI융합학부"]
+      "개설학과": ["경영정보학부", "사회복지학과", "사이버보안학과", "수학과", "물리학과", "화학과", "생명과학과", "정보보호학과", "소프트웨어학과", "컴퓨터공학과", "전자공학과", "기계공학과", "산업공학과", "화학공학과", "건축학과", "의학과", "간호학과", "AI융합학부"]
     },
     "서울시립대학교": {
-      "인문·사회계열": ["국어국문학과","영어영문학과","국사학과","철학과","행정학과","경제학부","사회복지학과","세무학과","경영학부","사회학과","중국어문화학과"],
-      "자연·공학계열": ["수학과","통계학과","물리학과","화학과","환경원예학과","컴퓨터과학부","전자전기컴퓨터공학부","화학공학과","기계정보공학과","신소재공학과","토목공학과","건축학부"],
-      "도시·자유전공": ["도시공학과","교통공학과","공간정보공학과","인공지능학과","자유전공학부"]
+      "인문·사회계열": ["국어국문학과", "영어영문학과", "국사학과", "철학과", "행정학과", "경제학부", "사회복지학과", "세무학과", "경영학부", "사회학과", "중국어문화학과"],
+      "자연·공학계열": ["수학과", "통계학과", "물리학과", "화학과", "환경원예학과", "컴퓨터과학부", "전자전기컴퓨터공학부", "화학공학과", "기계정보공학과", "신소재공학과", "토목공학과", "건축학부"],
+      "도시·자유전공": ["도시공학과", "교통공학과", "공간정보공학과", "인공지능학과", "자유전공학부"]
     },
     "동국대학교": {
-      "인문·사회계열": ["국어국문학과","영어영문학과","일본어통번역학과","중어중문학과","사학과","철학과","행정학과","정치외교학과","사회학과","경제학과","경영학과","회계학과","법과대학","미디어커뮤니케이션학과","문화재학과"],
-      "자연·공학계열": ["수학과","물리반도체과학부","화학과","생명과학과","바이오환경과학과","컴퓨터공학전공","AI소프트웨어학부","전자전기공학부","기계로봇에너지공학과","건설환경공학과","건축학부","통계학과"],
-      "의료·자유전공": ["의예과","약학과","불교학부","열린전공학부"]
+      "인문·사회계열": ["국어국문학과", "영어영문학과", "일본어통번역학과", "중어중문학과", "사학과", "철학과", "행정학과", "정치외교학과", "사회학과", "경제학과", "경영학과", "회계학과", "법과대학", "미디어커뮤니케이션학과", "문화재학과"],
+      "자연·공학계열": ["수학과", "물리반도체과학부", "화학과", "생명과학과", "바이오환경과학과", "컴퓨터공학전공", "AI소프트웨어학부", "전자전기공학부", "기계로봇에너지공학과", "건설환경공학과", "건축학부", "통계학과"],
+      "의료·자유전공": ["의예과", "약학과", "불교학부", "열린전공학부"]
     },
     "홍익대학교": {
-      "인문·자연계열": ["국어교육과","영어교육과","역사교육과","수학교육과","경영학부","경제학부","법학부","불어불문학과","독어독문학과","영어영문학과","사학과","철학과","수학과","물리학과","화학과","전자전기공학부","컴퓨터공학과","화학공학과","건설환경공학부","건축학부","기계시스템디자인공학과","신소재공학부"],
-      "미술·디자인계열": ["회화과","조각과","도예유리과","목조형가구학과","섬유미술패션디자인과","금속조형디자인과","시각디자인학과","산업디자인학과","영상학과","판화과","예술학과"]
+      "인문·자연계열": ["국어교육과", "영어교육과", "역사교육과", "수학교육과", "경영학부", "경제학부", "법학부", "불어불문학과", "독어독문학과", "영어영문학과", "사학과", "철학과", "수학과", "물리학과", "화학과", "전자전기공학부", "컴퓨터공학과", "화학공학과", "건설환경공학부", "건축학부", "기계시스템디자인공학과", "신소재공학부"],
+      "미술·디자인계열": ["회화과", "조각과", "도예유리과", "목조형가구학과", "섬유미술패션디자인과", "금속조형디자인과", "시각디자인학과", "산업디자인학과", "영상학과", "판화과", "예술학과"]
     }
   };
 
@@ -169,25 +169,25 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           if (headerRowIndex !== -1) {
             const headerRow = jsonData[headerRowIndex];
-            const nameCol = headerRow.findIndex(c => c && (String(c).replace(/\s+/g,"").includes("성명") || String(c).replace(/\s+/g,"").includes("이름")));
-            const gradeCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g,"") === "학년");
-            const classCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g,"") === "반");
-            const numCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g,"").includes("번호"));
-            const hakbunCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g,"").includes("학번"));
+            const nameCol = headerRow.findIndex(c => c && (String(c).replace(/\s+/g, "").includes("성명") || String(c).replace(/\s+/g, "").includes("이름")));
+            const gradeCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g, "") === "학년");
+            const classCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g, "") === "반");
+            const numCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g, "").includes("번호"));
+            const hakbunCol = headerRow.findIndex(c => c && String(c).replace(/\s+/g, "").includes("학번"));
             for (let i = headerRowIndex + 1; i < jsonData.length; i++) {
               const row = jsonData[i];
               if (!row) continue;
               let sName = nameCol !== -1 ? String(row[nameCol] || "").trim() : "";
               if (!sName || sName === "undefined") continue;
-              let sGrade = gradeCol !== -1 ? String(row[gradeCol] || "").replace(/[^0-9]/g,"") : "";
-              let sClass = classCol !== -1 ? String(row[classCol] || "").replace(/[^0-9]/g,"") : "";
-              let sNum = numCol !== -1 ? String(row[numCol] || "").replace(/[^0-9]/g,"") : "";
+              let sGrade = gradeCol !== -1 ? String(row[gradeCol] || "").replace(/[^0-9]/g, "") : "";
+              let sClass = classCol !== -1 ? String(row[classCol] || "").replace(/[^0-9]/g, "") : "";
+              let sNum = numCol !== -1 ? String(row[numCol] || "").replace(/[^0-9]/g, "") : "";
               if (hakbunCol !== -1 && row[hakbunCol]) {
-                let hakbun = String(row[hakbunCol]).replace(/[^0-9]/g,"");
+                let hakbun = String(row[hakbunCol]).replace(/[^0-9]/g, "");
                 if (hakbun.length >= 4) {
-                  if (!sGrade) sGrade = hakbun.substring(0,1);
-                  if (!sClass) sClass = hakbun.substring(1,3).replace(/^0+/,"");
-                  if (!sNum) sNum = hakbun.substring(3).replace(/^0+/,"");
+                  if (!sGrade) sGrade = hakbun.substring(0, 1);
+                  if (!sClass) sClass = hakbun.substring(1, 3).replace(/^0+/, "");
+                  if (!sNum) sNum = hakbun.substring(3).replace(/^0+/, "");
                 }
               }
               const option = document.createElement("option");
@@ -292,9 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (achieveCol === -1 && cell.includes("성취도")) achieveCol = j;
     }
     // 위치 기반 폴백 (NEIS 표준: 번호|성명|학년|학기|교과군|과목|단위수|...|석차등급)
-    if (subjectCol === -1 && headerRow.length >= 6)  subjectCol = 5;   // C6
-    if (creditCol  === -1 && headerRow.length >= 7)  creditCol  = 6;   // C7
-    if (gradeCol   === -1 && headerRow.length >= 10) gradeCol   = 9;   // C10
+    if (subjectCol === -1 && headerRow.length >= 6) subjectCol = 5;   // C6
+    if (creditCol === -1 && headerRow.length >= 7) creditCol = 6;   // C7
+    if (gradeCol === -1 && headerRow.length >= 10) gradeCol = 9;   // C10
 
     const dataStartIndex = headerRowIdx + 1;
     const extractedCourses = [], achieveOnlyCourses = [];
@@ -405,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (fileName.includes("행동") || fileName.includes("행특") || fileName.includes("종합"))
         fileTypeHint = "behavior";
       else if (fileName.includes("창체") || fileName.includes("자율") || fileName.includes("동아리") ||
-               fileName.includes("봉사") || fileName.includes("진로"))
+        fileName.includes("봉사") || fileName.includes("진로"))
         fileTypeHint = "creative";
       else if (fileName.includes("교과") || fileName.includes("세특") || fileName.includes("과목"))
         fileTypeHint = "subject";
@@ -424,8 +424,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (headerRowIdx === -1 || nameCol === -1) continue;
 
-      const headerRow  = jsonData[headerRowIdx] || [];
-      const subRow     = jsonData[headerRowIdx + 1] || []; // 2단 서브헤더 (창체 등)
+      const headerRow = jsonData[headerRowIdx] || [];
+      const subRow = jsonData[headerRowIdx + 1] || []; // 2단 서브헤더 (창체 등)
 
       // ── 서브헤더 여부 판단 ──
       // 다음 행에 숫자/학생명이 없고 헤더 키워드가 있으면 서브헤더로 간주
@@ -434,7 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const sub = subRow.map(c => String(c || "").replace(/\s+/g, ""));
         const hasKeyword = sub.some(c => c === "구분" || c === "특기사항" || c === "활동내용" || c === "시간");
         const hasStudentName = sub.some(c => c.length >= 2 && /[가-힣]/.test(c) && ![
-          "구분","특기사항","활동내용","시간","학기","학년","번호"
+          "구분", "특기사항", "활동내용", "시간", "학기", "학년", "번호"
         ].includes(c));
         if (hasKeyword && !hasStudentName) dataStartIndex = headerRowIdx + 2;
       }
@@ -445,8 +445,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const maxCols = Math.max(headerRow.length, subRow.length);
       for (let j = 0; j < maxCols; j++) {
-        const h   = String(headerRow[j] || "").replace(/\s+/g, "");
-        const sub = String(subRow[j]    || "").replace(/\s+/g, "");
+        const h = String(headerRow[j] || "").replace(/\s+/g, "");
+        const sub = String(subRow[j] || "").replace(/\s+/g, "");
         const combined = h + " " + sub;
 
         // 행특 내용 감지
@@ -500,7 +500,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const cn = String(row[nameCol] || "").replace(/\s+/g, "");
           if (cn) currentStudent = cn;
           if (!currentStudent || currentStudent !== tgt) continue;
-          const subj   = subjCol   !== -1 ? String(row[subjCol]   || "").trim() : "";
+          const subj = subjCol !== -1 ? String(row[subjCol] || "").trim() : "";
           const detail = String(row[detailCol] || "").trim();
           if (detail && detail.length > 2) extractedText.push(subj ? "[" + subj + "]\n" + detail : detail);
         }
@@ -516,22 +516,22 @@ document.addEventListener("DOMContentLoaded", () => {
           const cn = String(row[nameCol] || "").replace(/\s+/g, "");
           if (cn) currentStudent = cn;
           if (!currentStudent || currentStudent !== tgt) continue;
-          const area   = areaCol   !== -1 ? String(row[areaCol]   || "").trim() : "";
+          const area = areaCol !== -1 ? String(row[areaCol] || "").trim() : "";
           const detail = String(row[detailCol] || "").trim();
           if (!detail || detail.length <= 2) continue;
-          if      (area.includes("자율"))   ag["자율"].push(detail);
+          if (area.includes("자율")) ag["자율"].push(detail);
           else if (area.includes("동아리")) ag["동아리"].push(detail);
-          else if (area.includes("봉사"))   ag["봉사"].push(detail);
-          else if (area.includes("진로"))   ag["진로"].push(detail);
+          else if (area.includes("봉사")) ag["봉사"].push(detail);
+          else if (area.includes("진로")) ag["진로"].push(detail);
           else if (area) ag["기타"].push("[" + area + "]\n" + detail);
           else ag["기타"].push(detail);
         }
         let rt = [];
-        if (ag["자율"].length   > 0) rt.push("[자율]\n"   + ag["자율"].join("\n\n"));
+        if (ag["자율"].length > 0) rt.push("[자율]\n" + ag["자율"].join("\n\n"));
         if (ag["동아리"].length > 0) rt.push("[동아리]\n" + ag["동아리"].join("\n\n"));
-        if (ag["봉사"].length   > 0) rt.push("[봉사]\n"   + ag["봉사"].join("\n\n"));
-        if (ag["진로"].length   > 0) rt.push("[진로]\n"   + ag["진로"].join("\n\n"));
-        if (ag["기타"].length   > 0) rt.push(ag["기타"].join("\n\n"));
+        if (ag["봉사"].length > 0) rt.push("[봉사]\n" + ag["봉사"].join("\n\n"));
+        if (ag["진로"].length > 0) rt.push("[진로]\n" + ag["진로"].join("\n\n"));
+        if (ag["기타"].length > 0) rt.push(ag["기타"].join("\n\n"));
         if (rt.length > 0)
           creativeInput.value = creativeInput.value
             ? creativeInput.value + "\n\n" + rt.join("\n\n")
@@ -543,7 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const cn = String(row[nameCol] || "").replace(/\s+/g, "");
           if (cn) currentStudent = cn;
           if (!currentStudent || currentStudent !== tgt) continue;
-          const gd     = gradeYearCol !== -1 ? String(row[gradeYearCol] || "").trim() : "";
+          const gd = gradeYearCol !== -1 ? String(row[gradeYearCol] || "").trim() : "";
           const detail = String(row[detailCol] || "").trim();
           if (detail && detail.length > 2) extractedText.push(gd ? "[" + gd + "학기]\n" + detail : detail);
         }
@@ -558,16 +558,16 @@ document.addEventListener("DOMContentLoaded", () => {
   evalForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     const formData = {
-      apiKey: (document.getElementById("api-key") || {value:""}).value.trim(),
+      apiKey: (document.getElementById("api-key") || { value: "" }).value.trim(),
       university: document.getElementById("university").value.trim(),
       major: document.getElementById("major").value.trim(),
-      grade: (document.getElementById("student-grade") || {value:""}).value.trim(),
-      class: (document.getElementById("student-class") || {value:""}).value.trim(),
-      number: (document.getElementById("student-number") || {value:""}).value.trim(),
-      name: (document.getElementById("student-name") || {value:""}).value.trim(),
+      grade: (document.getElementById("student-grade") || { value: "" }).value.trim(),
+      class: (document.getElementById("student-class") || { value: "" }).value.trim(),
+      number: (document.getElementById("student-number") || { value: "" }).value.trim(),
+      name: (document.getElementById("student-name") || { value: "" }).value.trim(),
       courses: document.getElementById("courses").value.trim(),
-      averageGrade: (document.getElementById("average-grade") || {value:""}).value.trim(),
-      achievementOnly: (document.getElementById("achievement-only") || {value:""}).value.trim(),
+      averageGrade: (document.getElementById("average-grade") || { value: "" }).value.trim(),
+      achievementOnly: (document.getElementById("achievement-only") || { value: "" }).value.trim(),
       subjectRecords: document.getElementById("subject-records").value.trim(),
       creativeActivities: document.getElementById("creative-activities").value.trim(),
       behavioralRecords: document.getElementById("behavioral-records").value.trim()
@@ -586,19 +586,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 견고한 JSON 추출 및 파싱
       let jsonString = rawResponse.trim();
-      
+
       // 마크다운 블록 제거
       if (jsonString.startsWith("```")) {
         const match = jsonString.match(/^```(?:json)?\s*([\s\S]*?)\s*```/);
         if (match) jsonString = match[1];
       }
-      
+
       const startIdx = jsonString.indexOf('{');
       const endIdx = jsonString.lastIndexOf('}');
       if (startIdx !== -1 && endIdx !== -1 && endIdx >= startIdx) {
         jsonString = jsonString.substring(startIdx, endIdx + 1);
       }
-      
+
       // JSON 구조 보정 (따옴표 내부의 실제 줄바꿈을 \n으로 변경)
       jsonString = jsonString.replace(/"([^"]*?)"/gs, (match, p1) => {
         return '"' + p1.replace(/\n/g, '\\n').replace(/\r/g, '\\r') + '"';
@@ -637,7 +637,7 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("modalBody").innerHTML =
             "<div style='background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--accent-primary)'>" +
             "<h4 style='margin-top:0;color:#96baff;margin-bottom:8px'>평가 요약</h4>" + marked.parse(compData.evaluation || "평가 내용이 없습니다.") + "</div>" +
-            (compData.scoreJustification ? 
+            (compData.scoreJustification ?
               "<div style='background:rgba(150,186,255,0.08);padding:15px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--success-color)'>" +
               "<h4 style='margin-top:0;color:var(--success-color);margin-bottom:8px'>점수 산출 근거</h4>" + marked.parse(compData.scoreJustification) + "</div>" : "") +
             "<div style='padding:0 5px'><h4 style='color:#96baff;margin-bottom:10px'>근거 활동 자료</h4>" + marked.parse(evidenceText) + "</div>";
@@ -648,6 +648,36 @@ document.addEventListener("DOMContentLoaded", () => {
         bindModal("btnAca", "학업역량", reportData.competencies.academic || {});
         bindModal("btnCar", "진로역량", reportData.competencies.career || {});
         bindModal("btnCom", "공동체역량", reportData.competencies.community || {});
+
+        // PDF 인쇄용 상세 데이터 미리 생성
+        const printArea = document.getElementById("printDetailedAnalysis");
+        if (printArea) {
+          let printHtml = "<h2 class='print-header' style='color:#000; text-align:center; margin-bottom:2rem;'>학생부 종합 평가 상세 리포트</h2>";
+          const comps = [
+            { id: "academic", title: "학업역량" },
+            { id: "career", title: "진로역량" },
+            { id: "community", title: "공동체역량" }
+          ];
+
+          comps.forEach(c => {
+            const d = reportData.competencies[c.id] || {};
+            const evidenceText = Array.isArray(d.evidence) ? d.evidence.map(e => "- " + e).join("\n") : (d.evidence || "근거 자료가 없습니다.");
+            printHtml += `
+              <div class="print-comp-item" style="margin-bottom:3rem; page-break-inside:avoid;">
+                <h3 class="print-comp-title" style="font-size:1.5rem; color:#000; border-left:5px solid #5e6ad2; padding-left:1rem; margin-bottom:1rem;">${c.title} (점수: ${d.score || "-"})</h3>
+                <div style="font-weight:700; margin-top:1.5rem; color:#444;">평가 요약</div>
+                <div style="color:#222; margin-bottom:1.5rem;">${marked.parse(d.evaluation || "평가 내용이 없습니다.")}</div>
+                ${d.scoreJustification ? `
+                  <div style="font-weight:700; margin-top:1.5rem; color:#444;">점수 산출 근거</div>
+                  <div style="color:#222; margin-bottom:1.5rem;">${marked.parse(d.scoreJustification)}</div>
+                ` : ""}
+                <div style="font-weight:700; margin-top:1.5rem; color:#444;">근거 활동 자료</div>
+                <div style="color:#222;">${marked.parse(evidenceText)}</div>
+              </div>
+            `;
+          });
+          printArea.innerHTML = printHtml;
+        }
       }
       document.getElementById("modalCloseBtn").onclick = () => document.getElementById("analysisModal").classList.add("hidden");
       document.getElementById("analysisModal").onclick = (ev) => { if (ev.target === document.getElementById("analysisModal")) document.getElementById("analysisModal").classList.add("hidden"); };
@@ -659,7 +689,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const errBox = document.createElement("div");
       errBox.style.cssText = "color:var(--error-color);padding:20px;";
       errBox.innerHTML = "<h3>분석 중 오류가 발생했습니다.</h3><p>" + error.message + "</p><p>API 키의 유효성을 확인하세요.</p>";
-      
+
       // dashboardViewer를 비우지 않고, 별도의 reportViewer를 활용해 에러 표시
       document.getElementById("dashboardViewer").classList.add("hidden");
       reportViewer.innerHTML = "";
@@ -676,7 +706,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function generateAIReport(data) {
     const modelName = "gemini-2.5-flash"; // 원래 사용하던 최신 모델로 복구
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${data.apiKey}`;
-    
+
     // 대학별 평가 기준 (가이드북 기반)
     const universityEvalCriteria = {
       "서울대학교": {
@@ -699,8 +729,8 @@ document.addEventListener("DOMContentLoaded", () => {
 ■ 전형별 비율: 지역균형(서류70%+면접30%) / 일반(서류50%+면접·구술50%)
 `,
         competencies: {
-          academic:  "학업역량(교과 성취도 정성적 해석·수강인원·성적 추이) + 학업태도(자기주도학습·탐구의지·독서역량)",
-          career:    "진로역량(전공관련 과목 이수·성취도·세특 내 진로 탐색·도전적 과목 선택)",
+          academic: "학업역량(교과 성취도 정성적 해석·수강인원·성적 추이) + 학업태도(자기주도학습·탐구의지·독서역량)",
+          career: "진로역량(전공관련 과목 이수·성취도·세특 내 진로 탐색·도전적 과목 선택)",
           community: "학업 외 소양(품성·리더십·협업·책임감·성실성·출결·봉사활동·행동특성)"
         },
         weights: { academic: 0.34, career: 0.33, community: 0.33 } // 정성평가 (균등)
@@ -719,8 +749,8 @@ document.addEventListener("DOMContentLoaded", () => {
 ■ 평가 주안점: 정성평가, 다각적 적용, 일관성·진정성, 고교 환경 내 노력
 `,
         competencies: {
-          academic:  "학업역량(성적 변화 추이·전공관련 성취·학업태도·탐구력) — 종합평가 Ⅰ(70%)",
-          career:    "진로역량(전공관련 교과 위계적 이수·성취도·진로탐색활동) — 종합평가 Ⅰ(70%)",
+          academic: "학업역량(성적 변화 추이·전공관련 성취·학업태도·탐구력) — 종합평가 Ⅰ(70%)",
+          career: "진로역량(전공관련 교과 위계적 이수·성취도·진로탐색활동) — 종합평가 Ⅰ(70%)",
           community: "공동체역량(협업·소통·나눔·배려·성실성·리더십) — 종합평가 Ⅱ(30%)"
         },
         weights: { academic: 0.35, career: 0.35, community: 0.30 } // 70(학+진) / 30(공)
@@ -740,8 +770,8 @@ document.addEventListener("DOMContentLoaded", () => {
 ■ 평가 주안점: 정성적 종합평가, 계열 적합성, 과목 선택·이수 과정, 다각적 종합평가
 `,
         competencies: {
-          academic:  "학업역량(학업성취도·학업태도·탐구력) — 학업우수 50%/계열적합 40%",
-          career:    "자기계발역량(계열관련탐색·전공관련이수·진로탐색경험) — 학업우수 30%/계열적합 40%",
+          academic: "학업역량(학업성취도·학업태도·탐구력) — 학업우수 50%/계열적합 40%",
+          career: "자기계발역량(계열관련탐색·전공관련이수·진로탐색경험) — 학업우수 30%/계열적합 40%",
           community: "공동체역량(협업·소통·나눔·배려·성실성·리더십) — 공통 20%"
         },
         weights: { academic: 0.50, career: 0.30, community: 0.20 } // 학업우수 기준
@@ -763,8 +793,8 @@ document.addEventListener("DOMContentLoaded", () => {
 ■ 평가 주안점: 과정 중심, 정성적 종합평가, 성장가능성 강조 (학업40%+성장30%=70% 핵심)
 `,
         competencies: {
-          academic:  "학업역량(학업성취도·탐구능력·융합능력) — 40%",
-          career:    "성장가능성(자기주도성·교과이수과정·경험개방성·목표지속성) + 창의적문제해결력 — 합산 40%",
+          academic: "학업역량(학업성취도·탐구능력·융합능력) — 40%",
+          career: "성장가능성(자기주도성·교과이수과정·경험개방성·목표지속성) + 창의적문제해결력 — 합산 40%",
           community: "공동체역량(리더심·소통·협업·규칙준수·나눔·배려) — 20%"
         },
         weights: { academic: 0.40, career: 0.40, community: 0.20 }
@@ -795,8 +825,8 @@ document.addEventListener("DOMContentLoaded", () => {
    3. 성장 과정·태도: 성취 수준보다 지적 성장 추이와 학업 태도
 `,
         competencies: {
-          academic:  "기초학업역량(학업성취도·성적 추이·교과이수상황) + 심층학업역량(비판적·창의적 사고·탐구능력) — 횡단발굴평가",
-          career:    "진로탐구역량(계열적합성·자기주도 진로탐색·계열관련 교과이수과정) — 전공이 아닌 계열 차원 평가",
+          academic: "기초학업역량(학업성취도·성적 추이·교과이수상황) + 심층학업역량(비판적·창의적 사고·탐구능력) — 횡단발굴평가",
+          career: "진로탐구역량(계열적합성·자기주도 진로탐색·계열관련 교과이수과정) — 전공이 아닌 계열 차원 평가",
           community: "공동체역량(소통·협업·나눔·배려·리더십·성장잠재력) — 직함 불문"
         },
         weights: { academic: 0.40, career: 0.40, community: 0.20 } // 정성평가 기반 추정치
@@ -848,8 +878,8 @@ document.addEventListener("DOMContentLoaded", () => {
    4. 학폭 반영: 2026학년도부터 학교폭력 기재 사항이 평가에 불이익
 `,
         competencies: {
-          academic:  "학업역량(학업성취도·학업태도·탐구력) — CAU융합형 50%/CAU탐구형 40%. 탐구력: 수업 중 궁금증을 자발적으로 확장·심화한 과정을 매우 높이 평가",
-          career:    "진로역량(전공관련교과이수노력·전공관련교과성취도·진로탐색활동경험) — CAU융합형 30%/CAU탐구형 50%. 탐구형 지원 시 특정 분야 심층 탐구 경험이 결정적",
+          academic: "학업역량(학업성취도·학업태도·탐구력) — CAU융합형 50%/CAU탐구형 40%. 탐구력: 수업 중 궁금증을 자발적으로 확장·심화한 과정을 매우 높이 평가",
+          career: "진로역량(전공관련교과이수노력·전공관련교과성취도·진로탐색활동경험) — CAU융합형 30%/CAU탐구형 50%. 탐구형 지원 시 특정 분야 심층 탐구 경험이 결정적",
           community: "공동체역량(협업·소통능력·나눔·배려·성실성·규칙준수·리더십) — CAU융합형 20%/CAU탐구형 10%"
         },
         weights: { academic: 0.50, career: 0.30, community: 0.20 } // 융합형인재 기준
@@ -909,8 +939,8 @@ document.addEventListener("DOMContentLoaded", () => {
    6. 교과종합평가(지역균형): 세특의 질적 내용이 성적 그 자체만큼 중요
 `,
         competencies: {
-          academic:  "학업역량(학업성취도·학업태도·탐구력) — 40%. 탁월성 기준: 수업 내 지적 호기심을 자기주도로 심화·확장한 탐구 과정('동기-과정-결과-성장')과 세특의 질적 깊이",
-          career:    "진로역량(전공관련 핵심·권장과목 이수 여부·교과 성취도·진로탐색 일관성과 진정성) — 40%. 지원 학과의 핵심과목 이수가 진로역량 점수에 결정적 영향",
+          academic: "학업역량(학업성취도·학업태도·탐구력) — 40%. 탁월성 기준: 수업 내 지적 호기심을 자기주도로 심화·확장한 탐구 과정('동기-과정-결과-성장')과 세특의 질적 깊이",
+          career: "진로역량(전공관련 핵심·권장과목 이수 여부·교과 성취도·진로탐색 일관성과 진정성) — 40%. 지원 학과의 핵심과목 이수가 진로역량 점수에 결정적 영향",
           community: "공동체역량(협업·소통·나눔·배려·성실성·규칙준수·리더십) — 20%. 면접(인성 50%+전공적합성 50%): 가치관·의사소통·전공 이해 및 논리적 사고력 평가"
         },
         weights: { academic: 0.40, career: 0.40, community: 0.20 }
@@ -979,8 +1009,8 @@ document.addEventListener("DOMContentLoaded", () => {
    6. 공동체역량: 비율은 20%이지만 리더십 경험이 면접에서 구체적인 질문 소재로 활용됨
 `,
         competencies: {
-          academic:  "학업역량(학업성취도·학업태도·탐구력) — 면접형 30%/서류형 50%. 탁월성: 교과 간 지식 전이, 자기주도 심화 탐구 과정이 핵심 평가 지표",
-          career:    "진로역량(전공관련 교과 이수 노력·성취도·진로탐색 활동경험) — 면접형 50%/서류형 30%. 외국어·AI·국제통상 분야에 대한 일관된 관심과 탐구 진정성이 결정적",
+          academic: "학업역량(학업성취도·학업태도·탐구력) — 면접형 30%/서류형 50%. 탁월성: 교과 간 지식 전이, 자기주도 심화 탐구 과정이 핵심 평가 지표",
+          career: "진로역량(전공관련 교과 이수 노력·성취도·진로탐색 활동경험) — 면접형 50%/서류형 30%. 외국어·AI·국제통상 분야에 대한 일관된 관심과 탐구 진정성이 결정적",
           community: "공동체역량(협업·소통·나눔·배려·성실성·리더십) — 공통 20%. 면접(학업40%+진로40%+공동체20%): 한국어 개별 맞춤 질문으로 서류 진위·논리·소통 능력 확인"
         },
         weights: { academic: 0.30, career: 0.50, community: 0.20 } // 면접형 기준
@@ -1049,8 +1079,8 @@ document.addEventListener("DOMContentLoaded", () => {
    6. 성적 추이: 단순 등급보다 3년간 상승세와 전공 관련 교과 성취도를 중시
 `,
         competencies: {
-          academic:  "학업역량(고교 기초 학업능력·전공 기초소양) — 면접형 35%/서류형 30%. 3년 성적 추이·원점수·이수자 수·전공 관련 교과 이수 현황을 정성적으로 종합 해석",
-          career:    "잠재역량(다학제적 전공수학 열의·통합적 문제해결 역량) — 면접형 40%/서류형 50%. 학과별 인재상 부합 탐구 활동 2~3가지, 깊이 있는 단일 주제 심화 탐구가 탁월성 기준",
+          academic: "학업역량(고교 기초 학업능력·전공 기초소양) — 면접형 35%/서류형 30%. 3년 성적 추이·원점수·이수자 수·전공 관련 교과 이수 현황을 정성적으로 종합 해석",
+          career: "잠재역량(다학제적 전공수학 열의·통합적 문제해결 역량) — 면접형 40%/서류형 50%. 학과별 인재상 부합 탐구 활동 2~3가지, 깊이 있는 단일 주제 심화 탐구가 탁월성 기준",
           community: "사회역량(공동체·시민윤리의식·협동학습능력·리더십·배려) — 면접형 25%/서류형 20%. 형식적 봉사보다 공동체 내 긍정적 영향력과 주도적 협업 경험 중시"
         },
         weights: { academic: 0.35, career: 0.40, community: 0.25 } // 면접형 기준
@@ -1118,8 +1148,8 @@ document.addEventListener("DOMContentLoaded", () => {
    6. 공동체역량은 '에피소드'로 평가: 형식적 활동보다 구체적 스토리가 있는 협력 경험 필수
 `,
         competencies: {
-          academic:  "학업역량(학업성취도·학업태도·탐구력) — 학과부 30%/자유전공 20%. 세특에 지적 호기심과 탐구 과정이 구체적으로 기재된 정도가 핵심",
-          career:    "진로역량(전공관련 교과 이수 노력·성취도·진로탐색경험) — 학과부 40%. 지원 학과 관련 위계적 교과 이수와 진정성 있는 탐색 과정이 결정적 / KU자유전공: 성장역량(자기주도성·창의적 문제해결·경험 다양성) — 50%",
+          academic: "학업역량(학업성취도·학업태도·탐구력) — 학과부 30%/자유전공 20%. 세특에 지적 호기심과 탐구 과정이 구체적으로 기재된 정도가 핵심",
+          career: "진로역량(전공관련 교과 이수 노력·성취도·진로탐색경험) — 학과부 40%. 지원 학과 관련 위계적 교과 이수와 진정성 있는 탐색 과정이 결정적 / KU자유전공: 성장역량(자기주도성·창의적 문제해결·경험 다양성) — 50%",
           community: "공동체역량(협업·소통·나눔·배려·성실성·리더십) — 공통 30%. 형식적 봉사보다 실제 공동체 내 긍정적 변화 이끈 구체적 에피소드 중시"
         },
         weights: { academic: 0.30, career: 0.40, community: 0.30 } // 일반 학과부 기준
@@ -1190,8 +1220,8 @@ document.addEventListener("DOMContentLoaded", () => {
    6. 자연·공학계열: 미적분·기하 이수가 전공수학역량 평가에 결정적 영향
 `,
         competencies: {
-          academic:  "학업역량(기초학업역량·학습주도성) — Do Dream 25%/학교장추천 50%. 세특에 드러나는 지적 호기심 해결 탐구 과정, 3년 성취도 추이 정성 평가",
-          career:    "전공적합성(전공수학역량 30%+전공관심도·진로탐색노력 25%) — Do Dream 55%. 전공 핵심 과목 이수·성취도와 세특의 전공 관련 심화 탐구가 합격의 핵심 결정 요소",
+          academic: "학업역량(기초학업역량·학습주도성) — Do Dream 25%/학교장추천 50%. 세특에 드러나는 지적 호기심 해결 탐구 과정, 3년 성취도 추이 정성 평가",
+          career: "전공적합성(전공수학역량 30%+전공관심도·진로탐색노력 25%) — Do Dream 55%. 전공 핵심 과목 이수·성취도와 세특의 전공 관련 심화 탐구가 합격의 핵심 결정 요소",
           community: "인성 및 사회성(역할주도성 10%+협업소통 10%) — Do Dream 20%. 면접 인성 30%: '계기-과정-결과-성장' 연결성 심층 질문, 구체적 主導 경험 중시"
         },
         weights: { academic: 0.25, career: 0.55, community: 0.20 } // Do Dream 전형 기준
@@ -1259,8 +1289,8 @@ document.addEventListener("DOMContentLoaded", () => {
    5. 서류 100% 전형(인문·자연): 세특·창체·행특의 전공 연계 탐구 기록이 합격의 전부
 `,
         competencies: {
-          academic:  "학업역량(기초학업성취도·학업태도·탐구력) — 40%. 교과 성적보다 수업 내 지적 호기심을 심화 탐구로 연결한 과정, 1~3학년 연계성 있는 맥락 확인",
-          career:    "진로역량(전공관련 교과 이수 노력·성취도·진로탐색활동과 경험) — 40%. 전공에 대한 1~3학년 관심 심화 흐름의 맥락과 일관성이 탁월성 핵심 판단 기준",
+          academic: "학업역량(기초학업성취도·학업태도·탐구력) — 40%. 교과 성적보다 수업 내 지적 호기심을 심화 탐구로 연결한 과정, 1~3학년 연계성 있는 맥락 확인",
+          career: "진로역량(전공관련 교과 이수 노력·성취도·진로탐색활동과 경험) — 40%. 전공에 대한 1~3학년 관심 심화 흐름의 맥락과 일관성이 탁월성 핵심 판단 기준",
           community: "공동체역량(협업·소통·나눔·배려·성실성·리더십) — 20%. 미술계열: 미술우수자 면접 60%(창의성·조형능력·미술활동보고서 진실성) — 실질 당락 좌우"
         },
         weights: { academic: 0.40, career: 0.40, community: 0.20 }
@@ -1300,9 +1330,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "특히, 생성되는 문자열 내에 실제 줄바꿈(Line break)이 포함되지 않도록 주의하고, 줄바꿈이 필요한 경우 반드시 '\\n' 문자로 대체하십시오.";
     const requestBody = {
       contents: [{ parts: [{ text: promptText }] }],
-      generationConfig: { 
-        temperature: 0.7, 
-        maxOutputTokens: 8192, 
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 8192,
         responseMimeType: "application/json",
         responseSchema: {
           type: "OBJECT",
@@ -1358,7 +1388,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       let jsonString = generatedText.trim();
-      
+
       // 마크다운 블록 제거 (혹시 몰라서 중복 처리)
       if (jsonString.startsWith("```")) {
         const match = jsonString.match(/^```(?:json)?\s*([\s\S]*?)\s*```/);
@@ -1370,7 +1400,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (startIdx !== -1 && endIdx !== -1 && endIdx >= startIdx) {
         jsonString = jsonString.substring(startIdx, endIdx + 1);
       }
-      
+
       // JSON 구조 보정
       jsonString = jsonString.replace(/"([^"]*?)"/gs, (match, p1) => {
         return '"' + p1.replace(/\n/g, '\\n').replace(/\r/g, '\\r') + '"';
@@ -1382,14 +1412,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const sCom = report.competencies?.community?.score || 0;
 
       const calcTotal = Math.round(
-        (sAca * weights.academic) + 
-        (sCar * weights.career) + 
+        (sAca * weights.academic) +
+        (sCar * weights.career) +
         (sCom * weights.community)
       );
 
       report.totalScore = calcTotal;
       report.calculationFormula = `종합점수(${calcTotal}) = (학업 ${sAca}점 × ${weights.academic}) + (진로 ${sCar}점 × ${weights.career}) + (공동체 ${sCom}점 × ${weights.community})`;
-      
+
       return JSON.stringify(report);
     } catch (e) {
       console.warn("Internal JSON fix failed, returning raw text. Error:", e.message);
@@ -1417,7 +1447,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEYS.CAT, categorySelect.value);
     localStorage.setItem(STORAGE_KEYS.MAJOR, majorSelect.value);
     localStorage.setItem(STORAGE_KEYS.SELECTED_INDEX, studentSelect.selectedIndex);
-    
+
     try {
       if (studentSelect.innerHTML) localStorage.setItem(STORAGE_KEYS.STUDENT_LIST, studentSelect.innerHTML);
       if (globalCourseJson) localStorage.setItem(STORAGE_KEYS.COURSE_DATA, JSON.stringify(globalCourseJson));
@@ -1435,12 +1465,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedUni) {
       universitySelect.value = savedUni;
       universitySelect.dispatchEvent(new Event("change"));
-      
+
       const savedCat = localStorage.getItem(STORAGE_KEYS.CAT);
       if (savedCat) {
         categorySelect.value = savedCat;
         categorySelect.dispatchEvent(new Event("change"));
-        
+
         const savedMajor = localStorage.getItem(STORAGE_KEYS.MAJOR);
         if (savedMajor) majorSelect.value = savedMajor;
       }

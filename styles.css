@@ -798,6 +798,50 @@ textarea::-webkit-scrollbar-thumb {
   #reportViewer:not(.hidden) {
     display: block !important;
   }
+
+  .print-only {
+    display: block !important;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #333;
+  }
+
+  .print-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 1rem;
+  }
+
+  .print-comp-item {
+    margin-bottom: 3rem;
+    page-break-inside: avoid;
+  }
+
+  .print-comp-title {
+    font-size: 1.5rem;
+    color: #000 !important;
+    margin-bottom: 1rem;
+    border-left: 5px solid #5e6ad2;
+    padding-left: 1rem;
+  }
+
+  .print-section-sub {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.5rem;
+    color: #444 !important;
+  }
+
+  .print-evidence-list {
+    margin-left: 1.5rem;
+  }
+}
+
+/* =============== Screen Styles for print-only =============== */
+@media screen {
+  .print-only {
+    display: none;
+  }
 }
 
 /* =============== Footer =============== */

@@ -53,13 +53,17 @@
           <label for="api-key">Google Gemini API Key <span class="label-desc">(필수 - AI 심층 분석에 필요합니다)</span></label>
           <input type="password" id="api-key" placeholder="AI Studio에서 발급받은 Gemini API 키를 입력하세요..." required style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
         </div>
-        <div class="form-group-row-3">
           <div class="form-group">
-            <label for="university">목표 대학</label>
-            <select id="university" required>
-              <option value="" disabled selected>대학을 선택하세요</option>
-            </select>
+            <label for="batch-excel-upload">세특/비교과 기록 일괄 업로드 (엑셀)</label>
+            <input type="file" id="batch-excel-upload" accept=".xlsx, .xls" multiple style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
           </div>
+          <div class="form-group-row-3">
+            <div class="form-group">
+              <label for="university">목표 대학</label>
+              <select id="university" required>
+                <option value="" disabled selected>대학을 선택하세요</option>
+              </select>
+            </div>
           <div class="form-group">
             <label for="category">계열</label>
             <select id="category" required>
@@ -89,12 +93,6 @@
           <div class="form-group" style="flex: 1;">
             <label for="achievement-only">성취도(등급 미산출) 과목 현황</label>
             <textarea id="achievement-only" rows="2" readonly placeholder="이수과목 파일 업로드 시 성취도(A, B, C 등) 과목 자동 추출 (P 제외)" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%; resize: vertical; min-height: 120px;"></textarea>
-          </div>
-        </div>
-        <div class="form-group-row">
-          <div class="form-group" style="grid-column: 1 / -1;">
-            <label for="batch-excel-upload">세특/비교과 기록 일괄 업로드 (엑셀)</label>
-            <input type="file" id="batch-excel-upload" accept=".xlsx, .xls" multiple style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
           </div>
         </div>
         <div class="form-group">
@@ -168,7 +166,8 @@
             <button type="button" id="pdfDownloadBtn" onclick="window.print()" style="background:var(--accent-gradient);color:#fff;border:none;padding:0.7rem 1.6rem;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;box-shadow:0 4px 15px rgba(124,131,253,0.3);display:inline-flex;align-items:center;gap:0.5rem;">
               <span>📄</span> PDF로 다운로드
             </button>
-          </div>
+          <!-- PDF 전용 상세 분석 영역 (모달 내용 포함) -->
+          <div id="printDetailedAnalysis" class="print-only"></div>
         </div>
       </div>
     </section>
