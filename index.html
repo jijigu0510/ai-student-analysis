@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학생 AI 생기부 분석 시스템</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+  <header class="header">
+    <div class="container">
+      <h1><span class="gradient-text">AI 학생부</span> 분석 시스템</h1>
+      <p>학생의 생기부 데이터를 분석하여 최적의 지원 전략을 제시합니다.</p>
+      <div class="header-actions">
+        <button id="reset-data-btn" class="btn-secondary" title="모든 데이터를 초기화하고 저장된 정보를 삭제합니다.">데이터 초기화</button>
+      </div>
+    </div>
+  </header>
+  <main class="main-container container">
+    <section class="glass-panel form-section">
+      <h2 class="section-title">학생 정보 입력</h2>
+      <form id="evalForm">
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="excel-upload">인적사항 파일 (엑셀)</label>
+            <input type="file" id="excel-upload" accept=".xlsx, .xls" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
+          </div>
+          <div class="form-group">
+            <label for="course-excel-upload">이수과목 파일 (엑셀)</label>
+            <input type="file" id="course-excel-upload" accept=".xlsx, .xls" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="student-select">학생 선택 <span class="label-desc">(인적사항 파일 업로드 후 자동 목록 표시)</span></label>
+          <select id="student-select" required>
+            <option value="" disabled selected>파일을 업로드하면 학생 목록이 표시됩니다</option>
+          </select>
+          <input type="hidden" id="student-grade">
+          <input type="hidden" id="student-class">
+          <input type="hidden" id="student-number">
+          <input type="hidden" id="student-name">
+        </div>
+        <div class="form-group">
+          <label for="api-key">Google Gemini API Key <span class="label-desc">(필수 - AI 심층 분석에 필요합니다)</span></label>
+          <input type="password" id="api-key" placeholder="AI Studio에서 발급받은 Gemini API 키를 입력하세요..." required style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
+        </div>
+        <div class="form-group-row-3">
+          <div class="form-group">
+            <label for="university">목표 대학</label>
+            <select id="university" required>
+              <option value="" disabled selected>대학을 선택하세요</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">계열</label>
+            <select id="category" required>
+              <option value="" disabled selected>계열을 선택하세요</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="major">지원 학과</label>
+            <select id="major" required>
+              <option value="" disabled selected>지원 학과를 선택하세요</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="courses">이수 과목 현황 <span class="label-desc">(파일 업로드하면 자동으로 추출됨)</span></label>
+          <textarea id="courses" rows="2" placeholder="예: 수학I, 수학II, 영어, 한국사, 물리I, 화학II" required></textarea>
+        </div>
+        <div class="form-group-row">
+          <div class="form-group" style="flex: 1;">
+            <label for="average-grade">교과 평균 등급 <span class="label-desc">(Σ(단위×등급) / 총 단위)</span></label>
+            <input type="text" id="average-grade" readonly placeholder="이수과목 파일 업로드 시 자동 계산" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
+            <div style="margin-top: 15px; height: 180px; width: 100%;">
+              <canvas id="grade-chart"></canvas>
+            </div>
+            <input type="hidden" id="yearly-grades-hidden">
+          </div>
+          <div class="form-group" style="flex: 2;">
+            <label for="achievement-only">성취도(등급 미산출) 과목 현황</label>
+            <textarea id="achievement-only" rows="2" readonly placeholder="이수과목 파일 업로드 시 성취도(A, B, C 등) 과목 자동 추출 (P 제외)" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%; resize: vertical; min-height: 247px;"></textarea>
+          </div>
+        </div>
+        <div class="form-group-row">
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="batch-excel-upload">세특/비교과 기록 일괄 업로드 (엑셀) <span class="label-desc">(교과세특, 창체특기, 행특 등 파일을 선택하면 아래 항목에 자동 추출됩니다)</span></label>
+            <input type="file" id="batch-excel-upload" accept=".xlsx, .xls" multiple style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject-records">교과 세특 (과목별능력 및 특기사항)</label>
+          <textarea id="subject-records" rows="4" placeholder="각 과목에서 이수한 세부능력 및 특기사항을 입력하세요..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="creative-activities">창체특기 (자율/동아리/봉사/진로)</label>
+          <textarea id="creative-activities" rows="4" placeholder="창의적 체험활동 자율·동아리·봉사·진로 특기사항을 입력하세요..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="behavioral-records">행동특성 (행동특성 및 종합의견)</label>
+          <textarea id="behavioral-records" rows="3" placeholder="행동특성 및 종합의견을 입력하세요..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" id="analyzeBtn">
+          <span class="btn-text">AI 심층 분석하기</span>
+          <span class="btn-icon">✦</span>
+        </button>
+      </form>
+    </section>
+    <section class="glass-panel result-section">
+      <h2 class="section-title">분석 리포트</h2>
+      <div class="result-container" id="resultContainer">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📋</div>
+          <p>왼쪽 폼에 학생 정보를 입력하고 분석 버튼을 클릭하세요.<br>AI가 심층 분석을 시작합니다.</p>
+        </div>
+        <div class="loading-state hidden" id="loadingState">
+          <div class="spinner"></div>
+          <div class="loading-text">
+            <span>AI가 학생 생기부를 심층 분석 중입니다</span>
+            <span class="dots">...</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+        <div class="markdown-body hidden" id="reportViewer"></div>
+        <div id="dashboardViewer" class="hidden">
+          <div class="dashboard-header">
+            <div class="total-score-box">
+              <span class="score-label">종합 점수</span>
+              <span class="score-value" id="overallScore">0</span>
+              <div class="score-divider"></div>
+              <span class="score-sub">AI 학교생활기록부<br>종합 평가 점수 (100점 만점)</span>
+            </div>
+            <div class="overall-evaluation">
+              <h3>종합 평가 주안점</h3>
+              <div id="overallText" class="markdown-body"></div>
+            </div>
+          </div>
+          <div class="competency-cards">
+            <div class="comp-card" data-comp="academic">
+              <h4>학업역량</h4>
+              <div class="comp-score" id="academicScore">-</div>
+              <button class="btn-detail" type="button" id="btnAca">상세 분석 보기</button>
+            </div>
+            <div class="comp-card" data-comp="career">
+              <h4>진로역량</h4>
+              <div class="comp-score" id="careerScore">-</div>
+              <button class="btn-detail" type="button" id="btnCar">상세 분석 보기</button>
+            </div>
+            <div class="comp-card" data-comp="community">
+              <h4>공동체역량</h4>
+              <div class="comp-score" id="communityScore">-</div>
+              <button class="btn-detail" type="button" id="btnCom">상세 분석 보기</button>
+            </div>
+          </div>
+          <!-- PDF 다운로드 버튼 -->
+          <div style="margin-top:1.5rem; text-align:right;">
+            <button type="button" id="pdfDownloadBtn" onclick="window.print()" style="background:var(--accent-gradient);color:#fff;border:none;padding:0.7rem 1.6rem;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;box-shadow:0 4px 15px rgba(124,131,253,0.3);display:inline-flex;align-items:center;gap:0.5rem;">
+              <span>📄</span> PDF로 다운로드
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="analysisModal" class="modal-overlay hidden">
+    <div class="modal-container glass-panel">
+      <div class="modal-header">
+        <h3 id="modalTitle">상세 분석</h3>
+        <button class="modal-close" id="modalCloseBtn" type="button">&times;</button>
+      </div>
+      <div class="modal-body markdown-body" id="modalBody"></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-sig">제작: <span class="sig-name">부안고등학교 교사 김진석</span></p>
+        <p class="footer-sub">© 2026 AI Student Record Analysis System. AI Powered High School Counseling.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
