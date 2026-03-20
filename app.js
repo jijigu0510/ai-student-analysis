@@ -637,6 +637,9 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("modalBody").innerHTML =
             "<div style='background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--accent-primary)'>" +
             "<h4 style='margin-top:0;color:#96baff;margin-bottom:8px'>평가 요약</h4>" + marked.parse(compData.evaluation || "평가 내용이 없습니다.") + "</div>" +
+            (compData.scoreJustification ? 
+              "<div style='background:rgba(150,186,255,0.08);padding:15px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--success-color)'>" +
+              "<h4 style='margin-top:0;color:var(--success-color);margin-bottom:8px'>점수 산출 근거</h4>" + marked.parse(compData.scoreJustification) + "</div>" : "") +
             "<div style='padding:0 5px'><h4 style='color:#96baff;margin-bottom:10px'>근거 활동 자료</h4>" + marked.parse(evidenceText) + "</div>";
           document.getElementById("analysisModal").classList.remove("hidden");
         };
@@ -1292,6 +1295,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "[평가 원칙] 당신은 매우 냉철하고 엄격한 입학사정관입니다. 단순한 나열이나 칭찬 위주의 서술을 지양하고, 학생의 기록에서 실질적인 역량이 드러나지 않는 부분이나 보완이 필요한 지점을 날카롭게 비판하십시오. 변별력을 위해 점수를 짜게 부여하십시오.\n\n" +
       "[종합 평가 주안점] " + data.university + " " + data.major + " 입학사정관의 시각에서 강점뿐만 아니라 치명적인 약점과 향후 전략적 보완점을 400자 이상 상세히 서술하세요.\n\n" +
       "[근거 자료] 각 역량별로 생기부 기록에 기반한 구체적인 근거를 5~7개씩 반드시 JSON 배열(List) 형태로 작성하세요.\n\n" +
+      "[점수 산출 근거] 각 역량(학업/진로/공동체) 별로 부여한 점수가 어떤 기준(교과 성취도, 탐구 역량, 활동의 질 등)으로 합산되었는지 구체적인 수치나 비중을 포함하여 산출 근거를 기술하세요.\n\n" +
       "반드시 유효한 JSON 형식으로만 응답하세요. 다른 설명이나 마크다운 백틱(```)은 포함하지 마십시오. \n" +
       "특히, 생성되는 문자열 내에 실제 줄바꿈(Line break)이 포함되지 않도록 주의하고, 줄바꿈이 필요한 경우 반드시 '\\n' 문자로 대체하십시오.";
     const requestBody = {
@@ -1313,27 +1317,30 @@ document.addEventListener("DOMContentLoaded", () => {
                   properties: {
                     score: { type: "NUMBER" },
                     evaluation: { type: "STRING" },
+                    scoreJustification: { type: "STRING" },
                     evidence: { type: "ARRAY", items: { type: "STRING" } }
                   },
-                  required: ["score", "evaluation", "evidence"]
+                  required: ["score", "evaluation", "scoreJustification", "evidence"]
                 },
                 career: {
                   type: "OBJECT",
                   properties: {
                     score: { type: "NUMBER" },
                     evaluation: { type: "STRING" },
+                    scoreJustification: { type: "STRING" },
                     evidence: { type: "ARRAY", items: { type: "STRING" } }
                   },
-                  required: ["score", "evaluation", "evidence"]
+                  required: ["score", "evaluation", "scoreJustification", "evidence"]
                 },
                 community: {
                   type: "OBJECT",
                   properties: {
                     score: { type: "NUMBER" },
                     evaluation: { type: "STRING" },
+                    scoreJustification: { type: "STRING" },
                     evidence: { type: "ARRAY", items: { type: "STRING" } }
                   },
-                  required: ["score", "evaluation", "evidence"]
+                  required: ["score", "evaluation", "scoreJustification", "evidence"]
                 }
               },
               required: ["academic", "career", "community"]
