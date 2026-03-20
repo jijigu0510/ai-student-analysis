@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let globalCourseJson = null;
   let globalBatchJsons = [];
+  let lastReportData = null; // PDF 인쇄용 최신 데이터 저장
 
   const universityData = {
     "고려대학교": {
@@ -648,37 +649,11 @@ document.addEventListener("DOMContentLoaded", () => {
         bindModal("btnAca", "학업역량", reportData.competencies.academic || {});
         bindModal("btnCar", "진로역량", reportData.competencies.career || {});
         bindModal("btnCom", "공동체역량", reportData.competencies.community || {});
-
-        // PDF 인쇄용 상세 데이터 미리 생성
-        const printArea = document.getElementById("printDetailedAnalysis");
-        if (printArea) {
-          let printHtml = "<h2 class='print-header' style='color:#000; text-align:center; margin-bottom:2rem;'>학생부 종합 평가 상세 리포트</h2>";
-          const comps = [
-            { id: "academic", title: "학업역량" },
-            { id: "career", title: "진로역량" },
-            { id: "community", title: "공동체역량" }
-          ];
-
-          comps.forEach(c => {
-            const d = reportData.competencies[c.id] || {};
-            const evidenceText = Array.isArray(d.evidence) ? d.evidence.map(e => "- " + e).join("\n") : (d.evidence || "근거 자료가 없습니다.");
-            printHtml += `
-              <div class="print-comp-item" style="margin-bottom:3rem; page-break-inside:avoid;">
-                <h3 class="print-comp-title" style="font-size:1.5rem; color:#000; border-left:5px solid #5e6ad2; padding-left:1rem; margin-bottom:1rem;">${c.title} (점수: ${d.score || "-"})</h3>
-                <div style="font-weight:700; margin-top:1.5rem; color:#444;">평가 요약</div>
-                <div style="color:#222; margin-bottom:1.5rem;">${marked.parse(d.evaluation || "평가 내용이 없습니다.")}</div>
-                ${d.scoreJustification ? `
-                  <div style="font-weight:700; margin-top:1.5rem; color:#444;">점수 산출 근거</div>
-                  <div style="color:#222; margin-bottom:1.5rem;">${marked.parse(d.scoreJustification)}</div>
-                ` : ""}
-                <div style="font-weight:700; margin-top:1.5rem; color:#444;">근거 활동 자료</div>
-                <div style="color:#222;">${marked.parse(evidenceText)}</div>
-              </div>
-            `;
-          });
-          printArea.innerHTML = printHtml;
-        }
       }
+
+      lastReportData = reportData; // 전역 변수에 저장
+      updatePrintArea(reportData);
+
       document.getElementById("modalCloseBtn").onclick = () => document.getElementById("analysisModal").classList.add("hidden");
       document.getElementById("analysisModal").onclick = (ev) => { if (ev.target === document.getElementById("analysisModal")) document.getElementById("analysisModal").classList.add("hidden"); };
       loadingState.classList.add("hidden");
@@ -1520,4 +1495,57 @@ document.addEventListener("DOMContentLoaded", () => {
   universitySelect.addEventListener("change", saveState);
   categorySelect.addEventListener("change", saveState);
   majorSelect.addEventListener("change", saveState);
+
+  // --- PDF 인쇄 기능 ---
+  window.downloadPDF = function() {
+    if (!lastReportData) {
+      alert("분석 결과가 아직 생성되지 않았습니다. 분석 버튼을 먼저 클릭해 주세요.");
+      return;
+    }
+    updatePrintArea(lastReportData);
+    window.print();
+  };
+
+  function updatePrintArea(reportData) {
+    const printArea = document.getElementById("printDetailedAnalysis");
+    if (!printArea) return;
+
+    let printHtml = `<h2 class='print-header' style='color:#000; text-align:center; margin-bottom:2rem; font-size:2rem;'>학생부 종합 평가 상세 리포트</h2>
+                     <p style='text-align:right; color:#666; margin-bottom:1rem;'>분석 일시: ${new Date().toLocaleString('ko-KR')}</p>
+                     <p style='margin-bottom:2rem; border-bottom:1px solid #eee; padding-bottom:1rem;'><strong>학생 정보:</strong> ${document.getElementById("student-grade")?.value || "-"}학년 ${document.getElementById("student-name")?.value || "선택된 학생 없음"} | <strong>목표:</strong> ${document.getElementById("university")?.value} ${document.getElementById("major")?.value}</p>`;
+
+    const comps = [
+      { id: "academic", title: "학업역량" },
+      { id: "career", title: "진로역량" },
+      { id: "community", title: "공동체역량" }
+    ];
+
+    comps.forEach(c => {
+      const d = reportData.competencies[c.id] || {};
+      const evidenceText = Array.isArray(d.evidence) ? d.evidence.map(e => "- " + e).join("\n") : (d.evidence || "근거 자료가 없습니다.");
+      printHtml += `
+        <div class="print-comp-item" style="margin-bottom:3rem; page-break-inside:avoid; border-bottom:1px solid #eee; padding-bottom:2rem;">
+          <h3 style="font-size:1.6rem; color:#000; border-left:6px solid #5e6ad2; padding-left:1.2rem; margin-bottom:1.5rem; background:#f8faff;">${c.title} (평가 점수: ${d.score || "-"}점)</h3>
+          
+          <div style="margin-bottom:1.5rem;">
+            <div style="font-weight:700; font-size:1.1rem; color:#333; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;"><span>🔍</span> 평가 요약</div>
+            <div style="color:#000; line-height:1.7; font-size:0.95rem;">${marked.parse(d.evaluation || "평가 내용이 없습니다.")}</div>
+          </div>
+          
+          ${d.scoreJustification ? `
+          <div style="margin-bottom:1.5rem;">
+            <div style="font-weight:700; font-size:1.1rem; color:#333; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;"><span>📊</span> 점수 산출 근거</div>
+            <div style="color:#000; line-height:1.7; font-size:0.95rem;">${marked.parse(d.scoreJustification)}</div>
+          </div>
+          ` : ""}
+          
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:#333; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;"><span>📝</span> 근거 활동 자료</div>
+            <div style="color:#000; line-height:1.7; font-size:0.95rem;">${marked.parse(evidenceText)}</div>
+          </div>
+        </div>
+      `;
+    });
+    printArea.innerHTML = printHtml;
+  }
 });
