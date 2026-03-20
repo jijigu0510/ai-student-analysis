@@ -582,16 +582,43 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerWidth <= 992) document.querySelector(".result-section").scrollIntoView({ behavior: "smooth" });
     try {
       const rawResponse = await generateAIReport(formData);
-      
-      // 견고한 JSON 추출 로직 추가
+      console.log("Raw AI Response:", rawResponse); // 디버깅용 로그 추가
+
+      // 견고한 JSON 추출 및 파싱
       let jsonString = rawResponse.trim();
+      
+      // 마크다운 블록 제거
+      if (jsonString.startsWith("```")) {
+        const match = jsonString.match(/^```(?:json)?\s*([\s\S]*?)\s*```/);
+        if (match) jsonString = match[1];
+      }
+      
       const startIdx = jsonString.indexOf('{');
       const endIdx = jsonString.lastIndexOf('}');
-      if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
+      if (startIdx !== -1 && endIdx !== -1 && endIdx >= startIdx) {
         jsonString = jsonString.substring(startIdx, endIdx + 1);
       }
       
-      const reportData = JSON.parse(jsonString);
+      // JSON 파싱 시도
+      let reportData;
+      try {
+        reportData = JSON.parse(jsonString);
+      } catch (parseError) {
+        console.error("JSON Parsing Error at position:", parseError.message);
+        console.log("Failed JSON string:", jsonString);
+        
+        // 만약 문자열 내부에 실제 줄바꿈이 포함되어 파싱이 실패하는 경우 대비 (일반적인 Unterminated string 원인)
+        try {
+          // 아주 조심스럽게 줄바꿈 문자를 처리해봄 (문자열 값 내의 줄바꿈만 \n으로 변경하는 것은 어려우므로 전체 시도)
+          const fixedJson = jsonString.replace(/\n/g, "\\n").replace(/\r/g, "\\r");
+          // 하지만 위 방식은 객체 구조 자체를 깨뜨릴 수 있음. 
+          // 실제로는 AI 응답 자체가 잘렸을 가능성이 높음.
+          throw parseError; // 우선은 원본 에러를 다시 던짐
+        } catch (e) {
+          throw new Error("AI 응답 형식이 올바르지 않거나 분석 내용이 너무 깁니다. 다시 시도해 주세요. (상세: " + parseError.message + ")");
+        }
+      }
+
       document.getElementById("overallScore").textContent = reportData.totalScore || 0;
       document.getElementById("overallText").innerHTML = marked.parse(reportData.overallEvaluation || "");
       document.getElementById("academicScore").textContent = reportData.competencies?.academic?.score || "-";
@@ -1269,7 +1296,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "[평가 원칙] 당신은 매우 냉철하고 엄격한 입학사정관입니다. 단순한 나열이나 칭찬 위주의 서술을 지양하고, 학생의 기록에서 실질적인 역량이 드러나지 않는 부분이나 보완이 필요한 지점을 날카롭게 비판하십시오. 변별력을 위해 점수를 짜게 부여하십시오.\n\n" +
       "[종합 평가 주안점] " + data.university + " " + data.major + " 입학사정관의 시각에서 강점뿐만 아니라 치명적인 약점과 향후 전략적 보완점을 400자 이상 상세히 서술하세요.\n\n" +
       "[근거 자료] 각 역량별로 생기부 기록에 기반한 구체적인 근거를 5~7개씩 반드시 불릿(-) 형태로 작성하세요.\n\n" +
-      "반드시 JSON 형식으로 응답하세요.";
+      "반드시 유효한 JSON 형식으로만 응답하세요. 다른 설명이나 마크다운 백틱(```)은 포함하지 마십시오. \n" +
+      "특히, 생성되는 문자열 내에 실제 줄바꿈(Line break)이 포함되지 않도록 주의하고, 줄바꿈이 필요한 경우 반드시 '\\n' 문자로 대체하십시오.";
     const requestBody = {
       contents: [{ parts: [{ text: promptText }] }],
       generationConfig: { 
@@ -1325,14 +1353,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!generatedText) throw new Error("AI 응답에서 텍스트를 추출할 수 없습니다.");
 
-    // 클라이언트 사이드에서 가중치 계산 및 산출식 추가
     try {
       let jsonString = generatedText.trim();
+      
+      // 마크다운 블록 제거 (혹시 몰라서 중복 처리)
+      if (jsonString.startsWith("```")) {
+        const match = jsonString.match(/^```(?:json)?\s*([\s\S]*?)\s*```/);
+        if (match) jsonString = match[1].trim();
+      }
+
       const startIdx = jsonString.indexOf('{');
       const endIdx = jsonString.lastIndexOf('}');
-      if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
+      if (startIdx !== -1 && endIdx !== -1 && endIdx >= startIdx) {
         jsonString = jsonString.substring(startIdx, endIdx + 1);
       }
+      
       const report = JSON.parse(jsonString);
       const sAca = report.competencies?.academic?.score || 0;
       const sCar = report.competencies?.career?.score || 0;
@@ -1349,6 +1384,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       return JSON.stringify(report);
     } catch (e) {
+      console.warn("Internal JSON fix failed, returning raw text. Error:", e.message);
       return generatedText;
     }
   }
