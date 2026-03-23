@@ -81,22 +81,20 @@
           <label for="courses">이수 과목 현황 <span class="label-desc">(파일 업로드하면 자동으로 추출됨)</span></label>
           <textarea id="courses" rows="2" placeholder="예: 수학I, 수학II, 영어, 한국사, 물리I, 화학II" required></textarea>
         </div>
-        <div class="form-group-row">
-          <div class="form-group" style="flex: 1;">
-            <label>교과 평균 등급 및 산출식</label>
-            <div style="display: flex; gap: 10px;">
-              <input type="text" id="average-grade" readonly placeholder="자동 계산" style="background: var(--input-bg); border: 2px solid var(--accent-primary); color: #fff; border-radius: 8px; padding: 0.75rem 1rem; width: 40%; font-weight: bold; font-size: 1.1em; text-align: center;" title="교과 평균 등급 결과">
-              <input type="text" id="average-formula" readonly placeholder="Σ(단위수×등급) / 총 단위" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); border-radius: 8px; padding: 0.75rem 1rem; width: 60%; font-size: 0.9em; text-align: center;" title="산출식">
-            </div>
-            <div style="margin-top: 15px; height: 180px; width: 100%;">
-              <canvas id="grade-chart"></canvas>
-            </div>
-            <input type="hidden" id="yearly-grades-hidden">
+        <div class="form-group">
+          <label for="achievement-only">성취도(등급 미산출) 과목 현황</label>
+          <textarea id="achievement-only" rows="2" readonly placeholder="이수과목 파일 업로드 시 성취도(A, B, C 등) 과목 자동 추출 (P 제외)" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%; resize: vertical; min-height: 80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>교과 평균 등급 및 산출식</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="average-grade" readonly placeholder="자동 계산" style="background: var(--input-bg); border: 2px solid var(--accent-primary); color: #fff; border-radius: 8px; padding: 0.75rem 1rem; width: 40%; font-weight: bold; font-size: 1.1em; text-align: center;" title="교과 평균 등급 결과">
+            <input type="text" id="average-formula" readonly placeholder="Σ(단위수×등급) / 총 단위" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); border-radius: 8px; padding: 0.75rem 1rem; width: 60%; font-size: 0.9em; text-align: center;" title="산출식">
           </div>
-          <div class="form-group" style="flex: 1;">
-            <label for="achievement-only">성취도(등급 미산출) 과목 현황</label>
-            <textarea id="achievement-only" rows="2" readonly placeholder="이수과목 파일 업로드 시 성취도(A, B, C 등) 과목 자동 추출 (P 제외)" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; width: 100%; resize: vertical; min-height: 120px;"></textarea>
+          <div style="display: none; margin-top: 15px; height: 180px; width: 100%;">
+            <canvas id="grade-chart"></canvas>
           </div>
+          <input type="hidden" id="yearly-grades-hidden">
         </div>
         <div class="form-group">
           <label for="subject-records">교과 세특 (과목별능력 및 특기사항)</label>
